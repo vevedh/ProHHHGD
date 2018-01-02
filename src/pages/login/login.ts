@@ -176,7 +176,7 @@ export class LoginPage {
             }
           }).then(() => {
             this.hideLoading();
-            this.checkActiveDir();
+            //this.checkActiveDir();
           }, (error) => {
             this.hideLoading();
             console.log("Memorisation NativeStorage impossible");
@@ -203,7 +203,7 @@ export class LoginPage {
             } else {
               console.log("LocalStorage n'est pas supporté");
             }
-            this.checkActiveDir();
+           // this.checkActiveDir();
           });
         }, (err) => {
           this.hideLoading();
