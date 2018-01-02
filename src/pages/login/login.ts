@@ -152,7 +152,8 @@ export class LoginPage {
       if (response) {
         //alert("Connexion etablie :" + response);
         this.showLoading("ldap userinf");
-        this.thservices1.doAdldapUserInf(this.account.username).subscribe((res) => {
+        let usrchk: string = this.account.username;
+        this.thservices.doAdldapUserInf(usrchk).subscribe((res) => {
           this.hideLoading();
           console.log("auth :", res);
           //this.nativeStorage.setItem("ProHHHGD", {
