@@ -1,0 +1,6 @@
+ "main": "main.js",
+
+ "electron": "ionic-app-scripts build && electron .",
+  "start": "electron ."
+
+

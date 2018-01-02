@@ -1,1 +1,27 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-split-pane>
+<ion-menu [content]="content" id="menuTech">
+
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons left>
+                    <button ion-button clear icon-only small (click)="gotoMain()"><ion-icon name="contact"></ion-icon></button>
+                </ion-buttons>
+                <ion-title>Menu</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content>
+            <ion-list>
+                <button ion-item *ngFor="let page of appDatas.pages" (click)="goToPage(page?.page)">
+                    <ion-icon item-left [name]="page?.icon" [ngStyle]="{'color': page?.color}"></ion-icon>
+                    {{page?.title}}
+                    <p>{{page?.description}}</p>
+                </button>
+            </ion-list>
+        </ion-content>
+
+    </ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav  [root]="rootPage" [rootParams]="paramsPage" #content swipeBackEnabled="false" main></ion-nav>
+</ion-split-pane>

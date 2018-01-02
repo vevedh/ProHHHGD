@@ -1,0 +1,29 @@
+// initialiser mon dossier en tant de git
+git init
+// etat de mmon depot
+git status
+
+git add .
+
+git commit -a -m "first commit"
+
+// creer la branche d'origin sur le sereur distant
+git remote add origin https://github.com/vevedh/ProHHHGD.git
+git remote add origin git://github.com/vevedh/itass.git
+// pour ceer la branche reellement sur le serveur distant
+curl -u vevedh https://api.github.com/user/repos -d "{\"name\":\"ProHHHGD\"}"
+
+// pour initialiser le depot sur le serveur distant et creer notre branch master sur le serveur
+git push -u origin master
+
+// memorisation de l'authentification
+git config --global credential.helper wincred
+
+
+ionic cordova plugin add cordova-plugin-ionic --save \
+--variable APP_ID="d5cc80b5" \
+--variable CHANNEL_NAME="Production" \
+--variable UPDATE_METHOD="background"
+
+
+

@@ -1,16 +1,6 @@
 // Ionic Variables and Theming. For more info, please see:
-// http://ionicframework.com/docs/theming/
-
-// Font path is used to include ionicons,
-// roboto, and noto sans fonts
+// http://ionicframework.com/docs/v2/theming/
 $font-path: "../assets/fonts";
-
-
-// The app direction is used to include
-// rtl styles in your app. For more info, please see:
-// http://ionicframework.com/docs/theming/rtl-support/
-$app-direction: ltr;
-
 
 @import "ionic.globals";
 
@@ -20,7 +10,7 @@ $app-direction: ltr;
 // To customize the look and feel of this app, you can override
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
-// http://ionicframework.com/docs/theming/overriding-ionic-variables/
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
 
 
@@ -33,15 +23,7 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
-);
-
-
+$colors: ( primary: #6c4b1f, secondary: #32db64, danger: #f53d3d, light:#6c4b1f, oldlight: #f4f4f4, dark: #222, favorite: #36c4ed);
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -73,10 +55,26 @@ $colors: (
 @import "ionic.theme.default";
 
 
+
+$toolbar-background: #90632a;
+
+ion-header.menu-header {
+    padding: 6px;
+    color: beige;
+    background-color: #90632a;
+}
+
+img.hhhlogo {
+    /* height: 110px; */
+    width: 90%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
-// http://ionicframework.com/docs/ionicons/
+// http://ionicframework.com/docs/v2/ionicons/
 
 @import "ionic.ionicons";
 

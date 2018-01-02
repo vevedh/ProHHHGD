@@ -1,0 +1,21 @@
+page-ad-search {
+    $list-md-background-color: #ff0000;
+    .swiper-slide {
+        /* display: inline-flex;*/
+        align-items: flex-start;
+        /*justify-content: flex-start;
+        text-align: left;*/
+    }
+    .swiper-pagination {
+        position: absolute;
+        padding-bottom: 40px;
+    }
+    ion-card.actif {
+        border-style: none;
+        border-color: green;
+    }
+    ion-card.inactif {
+        border-style: dashed;
+        border-color: red;
+    }
+}

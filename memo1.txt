@@ -1,0 +1,35 @@
+var symdest = require('gulp-symdest');
+var electron = require('gulp-atom-electron');
+
+export = () => {
+  let src = [
+    'dist/dev/**/*'
+  ];
+  return gulp.src(src, { base: 'dist/dev' })
+    .pipe(electron({ version: '0.37.2', platform: 'win32', winIcon: 'src/assets/logo.ico' }))
+    .pipe(symdest('desktop/windows'));
+};
+
+
+
+var copyJson = function() {
+    return gulp.src(['app/**/*.json'])
+        .pipe(gulp.dest('www/build'));
+}
+
+var copyCss = function() {
+    return gulp.src(['app/theme/**/*.css'])
+        .pipe(gulp.dest('www/build/css'));
+}
+
+
+var copyImg = function() {
+    return gulp.src(['app/**/*.*(png|jpg|gif)'])
+        .pipe(gulp.dest('www/build'));
+}
+
+
+//-------------------------------
+gulp.task('json', copyJson);
+gulp.task('img', copyImg);
+gulp.task('css', copyCss);

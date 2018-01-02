@@ -1,0 +1,164 @@
+<!--
+  Generated template for the AdSearch page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Recherche AD</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only item-right (click)="showOptMenu()">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="tools" color="oldlight">
+            <ion-segment-button value="users">
+                <ion-icon name="person"></ion-icon>
+                &nbsp;Utilisateurs
+            </ion-segment-button>
+            <ion-segment-button value="groupes">
+                <ion-icon name="people"></ion-icon>
+                &nbsp;Groupes
+            </ion-segment-button>
+            <ion-segment-button value="computers">
+                <ion-icon name="desktop"></ion-icon>
+                &nbsp;Pcs
+            </ion-segment-button>
+        </ion-segment>
+        <!--<button ion-button small icon-only clear color="oldlight" (click)="showGroupes()" *ngIf="currentSlideIndex >= 0">
+          <ion-icon name="people"></ion-icon>
+        </button>-->
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-searchbar *ngIf="tools=='users'" placeholder="utilisateur à rechercher (nom ou prenom)" [(ngModel)]="searchname" (ionInput)="getUsers($event)" (search)="doEnter()"></ion-searchbar>
+    <ion-slides *ngIf="tools=='users'" pager (ionSlideDidChange)="slideChanged()">
+        <ion-slide *ngFor="let user of userInfos">
+            <ion-card [ngClass]="{'inactif': !user?.actif, 'actif': user?.actif}">
+                <ion-item>
+                    <ion-thumbnail item-left>
+                        <img [src]="user?.picture">
+                    </ion-thumbnail>
+                    <h2>{{user?.displayname}}</h2>
+                    <p>{{user?.email}}</p>
+                    <p>{{user?.name | uppercase }}</p>
+
+                </ion-item>
+
+                <!--<img src="img/advance-card-bttf.png">-->
+
+                <ion-card-content left>
+                    <p><b>Adresse :</b></p>
+                    <p>{{user?.street}}</p>
+                    <p>{{user?.codep}} {{user?.ville}}</p>
+                    <p>{{user?.pays}}</p>
+                </ion-card-content>
+                <ion-row>
+                    <ion-col>
+                        <button ion-button clear (click)="showGroupes()" item-right>
+                        <ion-icon name="people"></ion-icon>
+                         &nbsp;Membre des groupes
+                        </button>
+                    </ion-col>
+                </ion-row>
+                <ion-item item-center *ngIf="(grpToDup != undefined) && ( userToDup != currentUserId ) && ( grpToDup?.length > 0 )">
+                    <button ion-button (click)="dupGroupes()" item-center color="danger">
+                        <ion-icon name="people"></ion-icon>
+                         &nbsp;Dupliquer({{grpToDup?.length}} <= {{userToDup}})
+                        </button>
+                </ion-item>
+                <ion-row>
+                    <ion-col left text-left>
+                        <p><b>Identifiant: </b>{{user?.userid|uppercase}}</p>
+                        <p><b>Creer le: </b>{{user?.creation}}</p>
+                        <p><b>Modifier le: </b>{{user?.modif}}</p>
+                        <p><b>Dernier accès: </b>{{user?.lastlog}}</p>
+                        <p><b>Tel fixe : </b><a href="tel:{{user?.telfixe}}">{{user?.telfixe}}</a></p>
+                        <p><b>Tel mobile : </b><a href="tel:{{user?.telmob}}">{{user?.telmob}}</a></p>
+                        <p><b>Tel int : </b>{{user?.telwork}}</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col left text-left>
+                        <p><b>Utilisateur {{user?.actif?'Actif':'Inactif'}}</b></p>
+                    </ion-col>
+                </ion-row>
+                <ion-row align-items-center>
+                    <ion-col>
+                        <button ion-button left small (click)="showNext()" *ngIf="(appDatas.userType == 'admintech') && (user?.actif=='Actif')">
+                            Modifier
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button left small (click)="doUnlockUsr()" *ngIf="(user?.actif=='Actif')">
+                            Debloquer
+                        </button>
+                    </ion-col>
+                    <!-- <ion-col>
+                        <button ion-button left small (click)=" doLogout() ">
+                            Deactiver
+                        </button>
+                    </ion-col>-->
+                </ion-row>
+            </ion-card>
+        </ion-slide>
+
+    </ion-slides>
+    <!-- GROUPES -->
+    <ion-searchbar *ngIf="tools=='groupes'" placeholder="groupe à rechercher" [(ngModel)]="grpsearch " (ionInput)="getGroupes($event)" (search)="doGrpEnter()"></ion-searchbar>
+    <ion-list *ngIf="tools=='groupes'">
+        <ion-item-sliding *ngFor="let grp of grpInfos">
+            <ion-item>
+                <h2>{{grp?.SamAccountName}}</h2>
+                <p>{{grp?.DistinguishedName}}</p>
+            </ion-item>
+            <ion-item-options side="left ">
+                <button ion-button icon-only (click)="showNext()" *ngIf="(appDatas.userType=='admintech' )">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>
+            <ion-item-options side="right">
+                <button ion-button icon-only (click)="getUserInGroup(grp?.SamAccountName)" *ngIf="(appDatas.userType=='admintech' )">
+                    <ion-icon name="people"></ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <!-- ORDINATEURS -->
+    <ion-searchbar *ngIf="tools=='computers'" placeholder="ordinateur à rechercher" [(ngModel)]="pcsearch" (ionInput)="getPcs($event)" (search)="doPcEnter()"></ion-searchbar>
+    <ion-list *ngIf="tools=='computers'">
+        <ion-item-sliding *ngFor="let pc of pcsInfos">
+            <ion-item>
+                <h2>{{pc?.Name}}</h2>
+                <p>{{pc?.IPv4Address}}</p>
+            </ion-item>
+            <ion-item-options side="left">
+                <button ion-button icon-only (click)="showNext() " *ngIf="(appDatas.userType=='admintech' )">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>
+            <ion-item-options side="right">
+                <button ion-button icon-only (click)="showNext()">
+                    <ion-icon name="people"></ion-icon>
+                </button>
+                <button ion-button icon-only (click)="forceRestart(pc?.Name)" *ngIf="(appDatas.userType=='admintech' )">
+                    <ion-icon name="refresh"></ion-icon>
+                </button>
+                <button ion-button icon-only (click)="showNext()">
+                    <ion-icon name="more"></ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>
+
+
+<ion-footer>
+
+</ion-footer>

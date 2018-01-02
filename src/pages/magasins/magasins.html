@@ -1,0 +1,53 @@
+<!--
+  Generated template for the Magasins page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+
+        <ion-title>Liste des magasins</ion-title>
+        <button ion-button menuToggle end><ion-icon name="menu"></ion-icon></button>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list-header>
+        <ion-label>Enseigne</ion-label>
+        <ion-select [(ngModel)]="enseigne" placeholder="choix" (ionChange)="getMagasins()">
+            <ion-option value="GEANT" selected="true">GEANT</ion-option>
+            <ion-option value="CASINO">CASINO</ion-option>
+            <ion-option value="ECOMAX MQ">ECOMAX MARTINIQUE</ion-option>
+            <ion-option value="ECOMAX GP">ECOMAX GUADELOUPE</ion-option>
+            <ion-option value="ECOMAX CY">ECOMAX CAYENNE</ion-option>
+
+        </ion-select>
+    </ion-list-header>
+    <ion-list>
+        <ion-item-sliding *ngFor="let magasin of magasins">
+            <ion-item>
+                <!--<ion-thumbnail item-left>-->
+                <ion-icon item-left name="home"></ion-icon>
+                <!--</ion-thumbnail>-->
+                <h2>{{magasin.nommag}}</h2>
+                <p>{{magasin.ipmag}}</p>
+                <p><b>{{magasin.nummag}}</b></p>
+                <button ion-button item-right (click)="goOrkaisse(magasin)">Caisses...</button>
+            </ion-item>
+            <ion-item-options side="left">
+                <button ion-button (click)="favorite(magasin.nummag)">Wifi</button>
+            </ion-item-options>
+
+            <ion-item-options side="right">
+                <!--<button ion-button (click)="unread(magasin.nummag)">Téléphone</button>-->
+                <button ion-button (click)="majdns(magasin.nummag)">MAJDNS</button>
+                <button ion-button (click)="majdsc(magasin.nummag)">MAJDSC</button>
+                <button ion-button (click)="majmag(magasin.nummag)">MAJMAG</button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

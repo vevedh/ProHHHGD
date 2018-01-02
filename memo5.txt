@@ -1,0 +1,32 @@
+function chgSplf($splfname,$numero,$utilisateur,$travail,$dest,$numfile) {
+as400GetFromFTP($ip,$user,$passwd,$filename,$bib,$file400) {
+crtdupoutq($biborig,$outqorig,$bibdest,$outqdest,$ip) {
+function killJob($numero,$utilisateur,$travail) {
+//liste des jobs actifs 
+wrkactjobArr() {
+//list des jobqs
+function wrkjobqArr() {
+//list des jobqs actifs
+function wrkjobqArrA(){
+// detail jobq
+function jobqArr($bib,$jobq) {
+		$client = new Zend_Soap_Client($this->wsdl);
+		$result = $client->jobqArr($bib,$jobq);
+		
+		return $result;
+	}
+// chnage jobq	
+	function chgJobq($job,$user,$numjob,$jobq,$bib) {
+		$client = new Zend_Soap_Client($this->wsdl);
+		$result = $client->chgJobq($job,$user,$numjob,$jobq,$bib);
+		
+		return $result;
+	}
+	
+	function actjobstatebArr($state) {
+		$client = new Zend_Soap_Client($this->wsdl);
+		$result = $client->actjobstatebArr($state);
+		
+		return $result;
+	}
+	

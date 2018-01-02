@@ -1,0 +1,15 @@
+cordova plugin add cordova-plugin-ionic --save --variable APP_ID="d5cc80b5" --variable CHANNEL_NAME="Production" --variable UPDATE_METHOD="background"
+cordova plugin add cordova-plugin-ionic --save --variable APP_ID="d5cc80b5" --variable CHANNEL_NAME="Master" --variable UPDATE_METHOD="background"
+cordova plugin add cordova-plugin-ionic --save --variable APP_ID="d5cc80b5" --variable CHANNEL_NAME="Master" --variable UPDATE_METHOD="auto"
+
+ionic package build android --release --prod --profile  prod_profile
+android update sdk --no-ui --filter build-tools-25.2.5,android-27,extra-android-m2repository
+ionic cordova build android --release --prod --keystore=prohhhgd.keystore --alias=veve
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore prohhhgd.keystore C:/prohhhgd/platforms/android/build/outputs/apk/android-release-unsigned.apk prohhhgd
+
+
+//it will ask us to enter the keystore password.
+
+//Finally, we need to run the zip align tool to optimize the APK
+G:\THSDCHE\AppData\Local\Android\android-sdk\build-tools\25.0.3\zipalign -v 4 c:/prohhhgd/platforms/android/build/outputs/apk/android-release-unsigned.apk prohhhgd.apk

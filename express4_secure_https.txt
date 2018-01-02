@@ -1,0 +1,38 @@
+openssl genrsa 1024 > private.key
+openssl req -new -key private.key -out cert.csr
+openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
+
+
+var https = require(‘https’);
+var httpsPort = 3443;
+// Setup HTTPS
+var options = {
+  key: fs.readFileSync(‘path/to/private.key’),
+  cert: fs.readFileSync(‘path/to/certificate.pem’)
+};
+var secureServer = https.createServer(options, app).listen(httpsPort);
+
+
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+
+
+var express = require('express');
+var http = require('http');
+var https = require('https');
+
+// Primary https app
+var app = express()
+var port = process.env.PORT || 3000;
+app.set('env', 'development');
+app.set('port', port);
+var router = express.Router();
+app.use('/', router);
+// ... other routes here
+var certOpts = {
+    key: '/path/to/key.pem',
+    cert: '/path/to/cert.pem'
+};
+var server = https.createServer(certOpts, app);
+server.listen(port, function(){
+    console.log('Express server listening to port '+port);
+});

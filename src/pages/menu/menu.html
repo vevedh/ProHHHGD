@@ -1,0 +1,86 @@
+<!--
+  Generated template for the Menu page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle icon-only>
+          <ion-icon name='menu'></ion-icon>
+        </button>
+        <ion-title>HHHGD - Support 3HSERVICES</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <!--<ion-card>
+        <div class="item item-avatar">
+            <img [src]="userInfos?.picture" />
+        </div>
+        
+        <ion-card-content>
+            <h2>Test</h2>
+            <p>autre info</p>
+            <button ion-button>Déconnection</button>
+        </ion-card-content>
+    </ion-card>-->
+    <ion-card>
+        <ion-item>
+            <ion-thumbnail item-left>
+                <img [src]="userInfos?.picture">
+            </ion-thumbnail>
+            <h2>{{userInfos?.displayname}}</h2>
+            <p>{{userInfos?.email}}</p>
+            <p>{{userInfos?.name | uppercase }}</p>
+
+        </ion-item>
+
+        <!--<img src="img/advance-card-bttf.png">-->
+
+        <ion-card-content>
+            <p><b>Adresse :</b></p>
+            <p>{{userInfos?.street}}</p>
+            <p>{{userInfos?.codep}} {{userInfos?.ville}}</p>
+            <p>{{userInfos?.pays}}</p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <p><b>Tel fixe : </b>{{userInfos?.telfixe}}</p>
+                <p><b>Tel mobile : </b>{{userInfos?.telmob}}</p>
+                <p><b>Tel int : </b>{{userInfos?.telwork}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row ion-item>
+            <ion-col align-self-center>
+                <button ion-button center small (click)="doLogout()">
+                    Deconnecter
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row ion-item *ngIf="usertype=='admintech'">
+            <ion-col align-self-center>
+                <button ion-button center small (click)="doRstOrkarte()">
+                    Redemarrage orkarte
+                </button>
+            </ion-col>
+        </ion-row>
+
+    </ion-card>
+    <ion-card *ngIf="usertype=='invite'">
+        <ion-card-content>
+            <p>Cette application est sécurisée par vos identifiants sur le domaine de l'entreprise. Si vous n'avez pas de menu ou pas celui désiré veuillez contacter le service informatique: <a href="mailto:support@hdistribution.fr">support@hdistribution.fr</a>                ou par téléphone au <a href="tel:0596300596">0596 30 05 96</a>
+            </p>
+        </ion-card-content>
+    </ion-card>
+    <!--<ion-list>
+        <button ion-item *ngFor="let item of items" (click)="goToPage(item.page)">
+            <ion-icon item-left [name]="item.icon" [ngStyle]="{'color': item.color}"></ion-icon>
+            {{item.title}}
+        </button>
+    </ion-list>-->
+
+</ion-content>

@@ -1,0 +1,116 @@
+// envoi de mail
+http://webservices.rvdechavigny.fr:3000/api/v1/mail
+body = { mailto:" --save
+	mailfrom:" --save
+	subject:" --save
+	text:" --save
+	html:""
+}
+
+// authentification active directory
+http://webservices.rvdechavigny.fr:3000/api/v1/adauth
+body = { username:" --save
+	 password:""
+}
+
+// liste imprimantes AS400
+http://webservices.rvdechavigny.fr:3000/api/v1/printers
+body = { imprimante:""
+}
+
+
+// liste des emails glpi
+http://webservices.rvdechavigny.fr:3000/api/v1/glpimail
+body = {}
+
+// liste des chiffres d'affaires magasins par enseigne
+http://webservices.rvdechavigny.fr:3000/api/v1/cajour
+body = {
+enseigne:" --save
+annee:" --save
+mois:" --save
+jour:""
+}
+
+// liste des chiffres d'affaires magasins par enseigne au mois
+http://webservices.rvdechavigny.fr:3000/api/v1/cajour
+body = {
+enseigne:""
+}
+
+// redemarrage tous les editeurs en MGSW
+http://webservices.rvdechavigny.fr:3000/api/v1/rstedtmsgw
+body  = {}
+
+// obtenir l'adresse ip d'une imprimante de l'AS400
+http://webservices.rvdechavigny.fr:3000/api/v1/ipimp
+body  = {imprimante:""}
+
+// lister les groupes dont un utilisateur est membre
+http://webservices.rvdechavigny.fr:3000/api/v1/adusr/grpmember
+body  = { username:""}
+
+
+// lister les partages d'un ordinateur du domaine
+http://webservices.rvdechavigny.fr:3000/api/v1/adshare
+body  = { computername:""}
+
+
+// liste des comptes inactifs du domaine
+http://webservices.rvdechavigny.fr:3000/api/v1/adusroff
+body  = { nbweek:""}
+
+// liste des comptes deactives du domaine
+http://webservices.rvdechavigny.fr:3000/api/v1/adusrdisabled
+
+// active un utilisateur  du domaine
+http://webservices.rvdechavigny.fr:3000/api/v1/adusrenable
+body  = { username:""}
+
+// debloque un utilisateur du domaine
+http://webservices.rvdechavigny.fr:3000/api/v1/adusrunlock
+body  = { username:""}
+
+//  deactive un utilisateur du domaine
+http://webservices.rvdechavigny.fr:3000/api/v1/adusrdisable
+body  = { username:""}
+
+
+//serveur backuptools powershell
+add-pssnapin windows.serverbackup
+
+
+ionic plugin add cordova-plugin-nativestorage --save
+ionic plugin add cordova-plugin-device --save
+ionic plugin add cordova-plugin-splashscreen --save
+ionic plugin add ionic-plugin-keyboard --save
+ionic plugin add cordova-plugin-file --save
+ionic plugin add cordova-plugin-file-transfer --save
+ionic plugin add cordova-plugin-camera --save
+ionic plugin add cordova-plugin-filepath --save
+ionic plugin add https://github.com/driftyco/cordova-plugin-wkwebview-engine.git --save
+
+ionic plugin remove cordova-plugin-console --save
+
+pour android: android.keystore  alias : veve
+
+ionic upload --note "Some details about this upload"
+
+ionic package build android --release --profile  prohhhgd_profile
+
+ionic package build ios --release --profile  prohhhgd_profile
+
+ionic package list
+
+ionic package download 2
+
+
+electron-packager ./www ProHHHGD  --platform=win32 --arch=ia32
+
+
+
+
+
+
+
+

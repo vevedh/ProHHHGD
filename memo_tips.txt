@@ -1,0 +1,79 @@
+npm install -g ionic cordova
+ionic start --v2 ProHHHGD
+npm install @ionic/cloud-angular --save
+ionic io init
+ionic plugin add cordova-plugin-facebook4 --save --variable APP_ID="1879101722303652" --variable APP_NAME="ProHHHGD"
+ionic plugin add cordova-plugin-nativestorage --save
+
+npm install electron --save-dev
+
+// key hash pour Facebook
+keytool -exportcert -alias veve -keystore android.keystore |openssl sha1 -binary | openssl base64
+// nettoyer la platform pour mise à jour dernieres version plugins cordova
+ionic state reset
+// uploader l'application sur apps.ionic.io
+ionic upload --note "Nouvelle version ionic 2 release avec facebook test"
+// compiler l'application
+// keytool -genkey -v -keystore  prohhhgd.keystore -alias veve -keyalg RSA -keysize 4096 -validity 10000
+// genere le fichier prohhhgd.keystore pour ionic avec alias: veve password: d@nZel!77
+// pour android: android.keystore  alias : veve
+
+ionic upload --note "Some details about this upload"
+
+ionic package build android --release --prod --profile  prohhhgd_profile
+
+// pour ios
+ionic package build ios --release --prod --profile  prohhhgd_profile
+
+ionic package list
+
+ionic package download XX   // XX = id
+
+
+// installer sur le materiel android
+adb install apps-ff96aad8-4.apk
+
+
+npm install -g electron-installer-windows
+npm install -g electron-packager
+
+electron-packager . app --platform win32 --arch x64 --out dist/
+
+electron-builder --win --ia32 --x64
+
+npm install electron-updater --save
+npm install electron-plugins --save
+npm install --save net-ping
+npm install --save node-powershell
+npm install electron-updater-tools -g
+
+
+ionic cordova plugin remove cordova-plugin-whitelist
+ionic cordova plugin remove cordova-plugin-statusbar
+ionic cordova plugin remove ionic-plugin-deploy
+ionic cordova plugin remove cordova-plugin-nativestorage
+ionic cordova plugin remove cordova-plugin-device
+ionic cordova plugin remove cordova-plugin-splashscreen
+ionic cordova plugin remove ionic-plugin-keyboard
+ionic cordova plugin remove cordova-plugin-file
+ionic cordova plugin remove cordova-plugin-file-transfer
+ionic cordova plugin remove cordova-plugin-camera
+ionic cordova plugin remove cordova-plugin-filepath
+ionic cordova plugin remove cordova-plugin-wkwebview-engine
+
+
+ionic cordova plugin add cordova-plugin-whitelist
+ionic cordova plugin add cordova-plugin-statusbar
+ionic cordova plugin add ionic-plugin-deploy
+ionic cordova plugin add cordova-plugin-nativestorage
+ionic cordova plugin add cordova-plugin-device
+ionic cordova plugin add cordova-plugin-splashscreen
+ionic cordova plugin add ionic-plugin-keyboard
+ionic cordova plugin add cordova-plugin-file
+ionic cordova plugin add cordova-plugin-file-transfer
+ionic cordova plugin add cordova-plugin-camera
+ionic cordova plugin add cordova-plugin-filepath
+ionic cordova plugin add cordova-plugin-wkwebview-engine
+
+ionic cordova plugin add cordova-sqlite-storage
+npm install --save @ionic-native/sqlite

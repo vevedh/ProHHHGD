@@ -1,0 +1,13 @@
+<!--
+  Generated template for the Orkaisse page.
+preloadTabs="true"
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-tabs (ionSelect)="onTabChange()">
+    <ion-tab [root]="TabPage1" tabTitle="Caisses" tabIcon="cart" [rootParams]="{selmag:selectMag}"></ion-tab>
+    <!-- [rootParams]="{nommag:nommag,nummag:nummag,ipmag:ipmag,enseigne:enseignes}" -->
+    <!--<ion-tab [root]="TabPage2" tabTitle="TPE(s)" tabIcon="card" [rootParams]="{selmag:selectMag}"></ion-tab>
+    <ion-tab [root]="TabPage3" tabTitle="Imp." tabIcon="print" [rootParams]="{selmag:selectMag}"></ion-tab>
+    <ion-tab [root]="TabPage4" tabTitle="Autres..." tabIcon="cog" [rootParams]="{selmag:selectMag}"></ion-tab>-->
+</ion-tabs>
