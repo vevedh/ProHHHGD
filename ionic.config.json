@@ -1,0 +1,8 @@
+{
+  "name": "prohhhgd",
+  "app_id": "d5cc80b5",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
