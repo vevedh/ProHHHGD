@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http , Headers, RequestOptions} from '@angular/http'; // Http ,
-//import { ElectronService } from 'ngx-electron';
+import { HttpClient , HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
 
 /*
   Generated class for the Thservices provider.
@@ -23,7 +22,7 @@ export class Thservices {
     public options:any = {};
 
 
-    constructor(private http: Http) { //, private electronService?:ElectronService
+  constructor(public  http: HttpClient) { //, private electronService?:ElectronService
         //this.http = _http;
         this.servicesURL = "http://3hservices.hhhgd.com/Amfphp/";
 
@@ -49,8 +48,8 @@ export class Thservices {
             'html': html
         });
 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post('https://webservices.rvdechavigny.fr/api/v1/mail', callData, options)
             .map(res => res)
@@ -91,21 +90,21 @@ export class Thservices {
     newDevice(obj): any {
 
         var callData = JSON.stringify(obj);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/myapps", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
     checkDevice(uid): any {
 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.get("https://webservices.rvdechavigny.fr/api/v1/myapps?name=ProHHHGD&uid=" + uid, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
@@ -113,11 +112,11 @@ export class Thservices {
 
     getUserList(): any {
 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.get("https://webservices.rvdechavigny.fr/api/v1/myapps?name=ProHHHGD", options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
@@ -125,11 +124,11 @@ export class Thservices {
     setUserState(uid: string,state:string): any {
 
         var callData = JSON.stringify({ "state": state });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.put("https://webservices.rvdechavigny.fr/api/v1/myapps/"+uid, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -137,11 +136,11 @@ export class Thservices {
 
     setUser(uid,user): any {
         var callData = JSON.stringify(user);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.put("https://webservices.rvdechavigny.fr/api/v1/myapps/"+uid, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
@@ -149,11 +148,11 @@ export class Thservices {
     getPrinters(imp: any): any {
 
         var callData = JSON.stringify({ "imprimante": imp });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/printers", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -168,11 +167,11 @@ export class Thservices {
             'methodName': 'mob_connect',
             'parameters': [uid, nom, prenom, dev, cdate, ctime]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
@@ -180,11 +179,11 @@ export class Thservices {
     doAdldapUserInf(username: string): any {
 
         var callData = JSON.stringify({ "username": username });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/infos", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -196,11 +195,11 @@ export class Thservices {
 
 
       var callData = JSON.stringify({ "computername": computername });
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
+     // let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
       return this.http.post(" https://webservices.rvdechavigny.fr/api/v1/bizsrv/restartsrv", callData, options)
-        .map(res => res.json())
+        .map(res => res)
         .catch(this.handleError);
 
     }
@@ -208,11 +207,11 @@ export class Thservices {
     doAdldapUserGrpes(username: string): any {
 
         var callData = JSON.stringify({ "username": username });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/grpmember", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -221,11 +220,11 @@ export class Thservices {
     doAdldapShares(computername: string): any {
 
         var callData = JSON.stringify({ "computername": computername });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adshare", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -235,11 +234,11 @@ export class Thservices {
     doMigAddWdns(nummag: string): any {
 
                 var callData = JSON.stringify({ "nummag": nummag });
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
+               // let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
                 return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migcaisse/addwdns", callData, options)
-                    .map(res => res.json())
+                    .map(res => res)
                     .catch(this.handleError);
 
 
@@ -249,11 +248,11 @@ export class Thservices {
     doMigAddHdns(nummag: string): any {
 
                 var callData = JSON.stringify({ "nummag": nummag });
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
+               // let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
                 return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migcaisse/addhdns", callData, options)
-                    .map(res => res.json())
+                    .map(res => res)
                     .catch(this.handleError);
 
 
@@ -263,11 +262,11 @@ export class Thservices {
     doMigAddMdns(nummag: string): any {
 
                 var callData = JSON.stringify({ "nummag": nummag });
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
+               // let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
                 return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migcaisse/addmdns", callData, options)
-                    .map(res => res.json())
+                    .map(res => res)
                     .catch(this.handleError);
 
 
@@ -277,11 +276,11 @@ export class Thservices {
     doMigDelMdns(nummag: string): any {
 
                 var callData = JSON.stringify({ "nummag": nummag });
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
+               // let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
                 return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migcaisse/delmdns", callData, options)
-                    .map(res => res.json())
+                    .map(res => res)
                     .catch(this.handleError);
 
 
@@ -290,11 +289,11 @@ export class Thservices {
     doMigDelHdns(nummag: string): any {
 
                 var callData = JSON.stringify({ "nummag": nummag });
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
+               // let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
                 return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migcaisse/delhdns", callData, options)
-                    .map(res => res.json())
+                    .map(res => res)
                     .catch(this.handleError);
 
 
@@ -303,11 +302,11 @@ export class Thservices {
     doMigDelWdns(nummag: string): any {
 
                 var callData = JSON.stringify({ "nummag": nummag });
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                let options = new RequestOptions({ headers: headers });
+               // let headers = new Headers({ 'Content-Type': 'application/json' });
+                let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
                 return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migcaisse/delwdns", callData, options)
-                    .map(res => res.json())
+                    .map(res => res)
                     .catch(this.handleError);
 
 
@@ -319,11 +318,11 @@ export class Thservices {
     doAdldapUserOffweek(nbweek: string): any {
 
         var callData = JSON.stringify({ "nbweek": nbweek });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusroff", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -332,11 +331,11 @@ export class Thservices {
     doAdldapComputerOffweek(nbweek: string): any {
 
         var callData = JSON.stringify({ "nbweek": nbweek });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adcpoff", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -346,11 +345,11 @@ export class Thservices {
     doAdldapUserEnable(username: string): any {
 
         var callData = JSON.stringify({ "username": username });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusrenable", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -360,11 +359,11 @@ export class Thservices {
     doAdldapUserUnlock(username: string): any {
 
         var callData = JSON.stringify({ "username": username });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusrunlock", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -374,11 +373,11 @@ export class Thservices {
     doAdldapUserDisable(username: string): any {
 
         var callData = JSON.stringify({ "username": username });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusrdisable", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -388,11 +387,11 @@ export class Thservices {
     doAdldapUserTumbNail(username: string): any {
 
         var callData = JSON.stringify({ "username": username });
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusrthumbnail", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -402,11 +401,11 @@ export class Thservices {
     doAdldapUserSearch(searchname: string): any {
 
         var callData = JSON.stringify({ "searchname": searchname });
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/search", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -416,11 +415,11 @@ export class Thservices {
     doAdldapGrpSearch(searchname: string): any {
 
         var callData = JSON.stringify({ "searchname": searchname });
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adgrp/search", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -430,11 +429,11 @@ export class Thservices {
     doAdldapPcsSearch(searchname: string): any {
 
         var callData = JSON.stringify({ "searchname": searchname });
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adpcs/search", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -446,11 +445,11 @@ export class Thservices {
     doAdldapUserOffNbjrs(nbweek: string): any {
 
         var callData = JSON.stringify({ "nbweek": nbweek });
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusroffnbjrs", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -459,55 +458,55 @@ export class Thservices {
     // deactive les comptes inactifs depuis xx jours
     doAdDisabledUsrNbj(nbjrs:string): any {
         var callData = JSON.stringify({ "nbweek": nbjrs });
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/offnbjrs", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
     // Liste des utilisateurs membre d'un groupe
     doAdUsrLstGrp(grpe:string): any {
         var callData = JSON.stringify({ "groupe": grpe });
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/lstusrgrp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
     //retirer un utilisateur a un groupe :
      doAdUsrRmvGrp(grpe:string,user:string): any {
         var callData = JSON.stringify({ "groupe": grpe ,"username":user});
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/rmvusrgrp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
     //Ajouter un utilisateur a un groupe :
      doAdUsrAddGrp(grpe:string,user:string): any {
         var callData = JSON.stringify({ "groupe": grpe ,"username":user});
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/addusrgrp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
     //Ajouter un groupe :
      doAdNewGrp(grpe:string,desc:string): any {
         var callData = JSON.stringify({ "grpname": grpe ,"desc":desc});
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
+        //let headers = new Headers({ 'Content-Type': 'application/json'});
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/adusr/newgrp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
@@ -519,22 +518,22 @@ export class Thservices {
             'methodName': 'adldapTest',
             'parameters': [username, password]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
 
     doGlpiSupport() {
         var callData = JSON.stringify({});
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/glpimail", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -550,11 +549,11 @@ export class Thservices {
             'methodName': 'mob_getInfos',
             'parameters': [guid]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -565,11 +564,11 @@ export class Thservices {
             'methodName': 'ork_ca_sec',
             'parameters': [guid, ensnom, annee, mois, jour]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -581,11 +580,11 @@ export class Thservices {
              'mois':mois,
              'jour':jour
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/cajour", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -594,11 +593,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'enseigne':ensnom
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/caevomois", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -608,11 +607,11 @@ export class Thservices {
     doAutoEdtMsgw(): any {
 
         var callData = null;
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/rstedtmsgw", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -624,11 +623,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'imprimante':imp
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/ipimp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -640,11 +639,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'user':user
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/dblquser", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -653,22 +652,22 @@ export class Thservices {
         var callData = JSON.stringify({
              'imprimante':prtn
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/dblqprtecomax", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
 
     debloqEcomax(): any {
         var callData = null;
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/dblqecomax", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -677,11 +676,11 @@ export class Thservices {
     restartOrkarte(): any {
 
         var callData = null;
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/rstorkarte", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
     }
 
@@ -689,11 +688,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'device':dev
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/dblqdev", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -702,11 +701,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'ipval':ipval
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/chkIp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -715,11 +714,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'ipval':ipvall
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/chkIp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -728,11 +727,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'imprimante':imp
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/startedt", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -741,11 +740,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'imprimante':imp
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/stopedt", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -755,11 +754,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'imprimante':imp
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/rstimp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -770,11 +769,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'num':num
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/infmag", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -786,11 +785,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'num':num
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migmagdsc", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -802,11 +801,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'num':num
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/migmagmob", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -819,10 +818,10 @@ export class Thservices {
             'methodName': 'query_AS400JSON',
             'parameters': ["select * from vvbase/vvmobca where ETAT='ACTIF' "]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -835,10 +834,10 @@ export class Thservices {
             'methodName': 'query_AS400JSON',
             'parameters': ["select * from vvbase/vvmobca where ETAT='SECOFF' "]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -852,10 +851,10 @@ export class Thservices {
             'methodName': 'query_AS400JSON',
             'parameters': ["select * from vvbase/vvmobca where GUID='" + guid + "' "]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }*/
@@ -867,10 +866,10 @@ export class Thservices {
             'methodName': 'query_update',
             'parameters': ["update  vvbase/vvmobca set NOM='" + nom + "', PRENOM='" + prenom + "' , EMAIL='" + email + "' where  GUID='" + guid + "' "]
         });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
         return this.http.post(this.servicesURL, callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }*/
@@ -881,11 +880,11 @@ export class Thservices {
              'num':nummag,
              'ipcaisse':ipcaisse
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/initmag", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -896,11 +895,11 @@ export class Thservices {
              'champ':chp,
              'valdata':valdata
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/infmag", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -910,11 +909,11 @@ export class Thservices {
          var callData = JSON.stringify({
              'imprimante':nmimp
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/ipimp", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -924,11 +923,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'ipmagasin':ipm
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/orknbcai", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -938,11 +937,11 @@ export class Thservices {
              'ipmagasin':ipm,
              'numcaisse':cnum
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/orkcaisse", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -952,11 +951,11 @@ export class Thservices {
              'ipmagasin':ipm,
              'numcaisse':cnum
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/orksrv", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -966,11 +965,11 @@ export class Thservices {
              'ipmagasin':ipm,
              'numcaisse':cnum
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/orkatos", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -980,11 +979,11 @@ export class Thservices {
              'ipmagasin':ipm,
              'numcaisse':cnum
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/orktpe", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -995,11 +994,11 @@ export class Thservices {
              'ipmagasin':ipm,
              'numcaisse':cnum
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/orktpedblq", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -1009,11 +1008,11 @@ export class Thservices {
              'ipmagasin':ipm,
              'numcaisse':cnum
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/orkrstssh", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
     }
@@ -1022,11 +1021,11 @@ export class Thservices {
         var callData = JSON.stringify({
              'enseigne':ens
             });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+       // let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
         return this.http.post("https://webservices.rvdechavigny.fr/api/v1/magbyens", callData, options)
-            .map(res => res.json())
+            .map(res => res)
             .catch(this.handleError);
 
 
@@ -1043,11 +1042,11 @@ export class Thservices {
       "mois": mois,
       "jour": jour
     });
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+   // let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options:any =  { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers')};
 
     return this.http.post('https://webservices.rvdechavigny.fr/api/v1/cajour', callData, options)
-      .map(res => res.json())
+      .map(res => res)
       .catch(this.handleError);
 
   }
