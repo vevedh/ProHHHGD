@@ -228,7 +228,7 @@ export class MyApp {
       this.splashScreen.hide();
 
 
-     
+
 
       if (this.platform.is('core')) {
         console.log("S'exécute sur une platform de bureau!");
