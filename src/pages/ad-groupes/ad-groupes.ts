@@ -30,6 +30,7 @@ export class AdGroupesPage {
 
 
   constructor(public appDatas: AppDatas, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public thservices: Thservices) {
+    this.appDatas = appDatas;
     this.srcGrp = this.navParams.get('grpmbr');
     this.srcUsr = this.navParams.get('user');
 

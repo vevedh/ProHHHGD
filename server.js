@@ -963,6 +963,33 @@ router.post('/magbyens', function(req, res, next) {
 });
 
 
+router.post('/veeam/runbkp', function(req, res, next) {
+    var nomsrv = req.body.nomsrv;
+    var user = "3HSERVICES\\thsdche";
+    var pass = "d@nZel77";
+    var auth = "Basic " + new Buffer(user + ":" + pass).toString("base64");
+    //var auth = 'Basic ' + new Buffer("3HSERVICES\thsdche:d@nZel77").toString('base64');
+    console.log("Autorization", auth);
+    var hd = { "Authorization": auth };
+    // authorization: 'Basic M0hTRVJWSUNFU1x0aHNkY2hlOmRAblplbDc3'
+    // Basic M0hTRVJWSUNFUwloc2RjaGU6ZEBuWmVsNzc=
+    // 'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
+    var options = {
+        method: 'POST',
+        url: 'http://90.83.220.214:8888/',
+        qs: { command: 'Invoke-Command { powerShell -file C:\SCRIPTS\VeeamZIP_' + nomsrv + '.ps1 } -ComputerName veeamsrv.3hservices.net' },
+        headers: hd
+    };
+    request(options, function(error, response, body) {
+        //if (error) throw new Error(error);
+        res.json({
+            success: true,
+            message: 'Sauvegarde lancée!'
+        });
+    });
+});
+
+
 router.post('/migcaisse/delhdns', function(req, res, next) {
     var nummag = req.body.nummag;
     var user = "3HSERVICES\\thsdche";
@@ -1340,13 +1367,13 @@ router.post('/bizsrv/restartsrv', function(req, res, next) {
         //if (error) throw new Error(error);
         res.json({
             success: true,
-            message: 'Serveur en cours de redemarrage!'
+            message: 'Service demarré!'
         });
     });
 });
 
 
-// liste des utilisateurs membre d'un groupe
+
 router.post('/adusr/grpmember', function(req, res, next) {
     var username = req.body.username;
     var user = "3HSERVICES\\thsdche";

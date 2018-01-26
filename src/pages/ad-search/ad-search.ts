@@ -45,6 +45,7 @@ export class AdSearchPage {
 
 
   constructor(public appDatas: AppDatas, public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public thservices: Thservices, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController) {
+    this.appDatas = appDatas;
     this.searchname = "";
     this.grpsearch = "";
     this.pcsearch = "";
@@ -187,15 +188,18 @@ forceRestart(itemname:any) {
     this.thservices.doAdldapGrpSearch(this.grpsearch).subscribe((res) => {
       this.hideLoading();
       console.log("Recherche Groupes : ", typeof (res));
+      console.log("Recherche Groupes : ",res);
       if (res) {
-        if (typeof (res) == 'object') {
+        if (Object(res).length == undefined)  {
           this.grpInfos = [];
-          this.grpInfos.push(res);
+          this.grpInfos.push(Object(res));
         } else {
           this.grpInfos = res;
         }
 
       }
+    }, (err) => {
+      this.hideLoading();
     });
   }
 
@@ -376,19 +380,76 @@ forceRestart(itemname:any) {
     this.thservices.doAdldapUserUnlock(this.currentUserId).subscribe((result) => {
       this.hideLoading();
       console.log(result);
+      let msg = this.alertCtrl.create({
+        title:"",
+        subTitle:"",
+        message: result.message,
+        buttons: [{
+          text:'OK',
+        handler: () => {
+          this.doEnter();
+        }}]
+      });
+      msg.present();
     }, (err) => {
       console.log("Deblocage impossible");
+
     }, () => {
       this.hideLoading();
     })
   }
 
+  doDisableUsr() {
+
+    this.thservices.doAdldapUserDisable(this.currentUserId).subscribe((result) => {
+        this.hideLoading();
+        console.log(result);
+      let msg = this.alertCtrl.create({
+        title: "",
+        subTitle: "",
+        message: result.message,
+        buttons: [{
+          text: 'OK',
+          handler: () => {
+            this.doEnter();
+          }
+        }]
+      });
+      msg.present();
+      }, (err) => {
+        console.log("Déactivation impossible");
+      }, () => {
+        this.hideLoading();
+      })
+  }
+  doEnableUsr() {
+    this.thservices.doAdldapUserEnable(this.currentUserId).subscribe((result) => {
+      this.hideLoading();
+      console.log(result);
+      let msg = this.alertCtrl.create({
+        title: "",
+        subTitle: "",
+        message: result.message,
+        buttons: [{
+          text: 'OK',
+          handler: () => {
+            this.doEnter();
+          }
+        }]
+      });
+      msg.present();
+    }, (err) => {
+      console.log("Activation compte");
+    }, () => {
+      this.hideLoading();
+    })
+  }
 
   getUserInGroup(grpname) {
     this.showLoading();
     this.thservices.doAdUsrLstGrp(grpname).subscribe((result) => {
       console.log("Liste des utilisateurs ", result);
-      this.winGrpUsr = this.modalCtrl.create('AdGrpusersPage', { lstusrs: result ,grp:grpname });
+      this.winGrpUsr = this.modalCtrl.create('AdGrpusersPage', { lstusrs: Object(result) ,grp:grpname });
       this.winGrpUsr.present();
       this.winGrpUsr.onDidDismiss(data => {
         if ((data != undefined) && (data.length > 0)) {

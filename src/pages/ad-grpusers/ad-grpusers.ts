@@ -29,6 +29,7 @@ export class AdGrpusersPage {
   savUsrChk:number;
 
   constructor(public appDatas: AppDatas, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public alertCtrl: AlertController, public thsservices: Thservices, public loadingCtrl:LoadingController) {
+    this.appDatas = appDatas;
     this.srcUsr = this.navParams.get('lstusrs');
     this.srcGrp = this.navParams.get('grp');
   }
