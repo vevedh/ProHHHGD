@@ -143,6 +143,9 @@ export class CamagasinsPage {
         let tocaEGP = 0;
         let tocaECY = 0;
 
+
+
+
         let tocliEMQ = 0;
         let tocliEGP = 0;
         let tocliECY = 0;
@@ -228,7 +231,7 @@ export class CamagasinsPage {
 
 
       } else {
-        console.log("Enseigne selectionnées :" + this.enseigne);
+        console.log("Enseigne selectionnées selection:" + this.enseigne);
         //----------------------GEANT ET CASINO--------------------------------------------------
         this.showProgress();
         this.vvs.getCaJour(String(this.enseigne), this.seljour, this.selmois, this.selannee).subscribe((data) => {//this.seljour, this.selmois, this.selannee).subscribe(data => {

@@ -966,30 +966,19 @@ function ork_ca_tesths($ensnom,$annee,$mois,$jour) {
 	function ork_ca($ensnom,$annee,$mois,$jour) {
 		include 'Net/SSH2.php';
 
-		//$sql="SELECT DISTINCT t2.IPMAG, t1.NOMMAG, t1.NUMMAG FROM VVBASE/VVMOBMAGIP t1 , VVBASE/VVSECMAGIP t2 WHERE  t1.ENSNOM LIKE '".$ensnom."%' AND t1.IPMAG=t2.IPMAG ";
-		$sql="SELECT DISTINCT IPMAG,NOMMAG,NUMMAG FROM VVBASE/VVMOBMAGIP  WHERE  ENSNOM LIKE '$ensnom%' ";
+		$sql="SELECT DISTINCT t2.IPMAG, t1.NOMMAG, t1.NUMMAG FROM VVBASE/VVMOBMAGIP t1 , VVBASE/VVSECMAGIP t2 WHERE  t1.ENSNOM LIKE '$ensnom%' AND t1.IPMAG=t2.IPMAG ";
 		//"SELECT t2.IPMAG FROM VVBASE/VVMOBMAGIP t1 , VVBASE/VVSECMAGIP t2 WHERE t2.GUID='$guid' AND t1.ENSNOM LIKE '$ensnom%' AND t1.IPMAG=t2.IPMAG ";
 		$ips = $this->query_as400JSON($sql);
 
 		$tab = array();
 
-		$i=0;
-		while ( $i<=(count($ips)) ) {
-		//for ($i=0;$i<(count($ips));$i++) {
-		    $fp = @fsockopen($ips[$i]["ipmag"], 22, $errno, $errstr, 6);
+		for ($i=0;$i<(count($ips));$i++) {
+		    $fp = @fsockopen($ips[$i]["ipmag"], 22, $errno, $errstr, 16);
 		    if ( $fp ) {
 			        $ssh = new Net_SSH2($ips[$i]["ipmag"]);
               if (!$ssh->login('root', 'orika')) {
                 if (!$ssh->login('root', 'orkaisse')) {
-
-					  $obj = array();
-
-						$obj["nommag"] = $ips[$i]["nommag"];
-						$obj["nummag"] = $ips[$i]["nummag"];
-						$obj["camag"] = '0';
-						$obj["climag"] = '0';
-						array_push($tab,$obj);
-                      $result = $tab;
+                      $result = 'Login Failed';
                 }
               }
 
@@ -1011,7 +1000,6 @@ function ork_ca_tesths($ensnom,$annee,$mois,$jour) {
 
               array_push($tab,$obj);
 		 }
-		 $i++;
 		}
 		$result=$tab;
 		return $result;
@@ -1501,15 +1489,15 @@ function ork_ca_tesths($ensnom,$annee,$mois,$jour) {
 
 		$ssh = new Net_SSH2($ip);
 		if (!$ssh->login('root', 'orika')) {
+			$result = 'Login Failed';
+		} else {
 			if (!$ssh->login('root', 'orkaisse')) {
 				$result = 'Login Failed';
-			} 
-		} else {
-			
+			} else {
 				$cmd = " if test -f /root/vvscripts/vvorkaws.sh;  then  echo $(. /root/vvscripts/vvorkaws.sh ".$act." ".$cnum." ); else  echo $(ssh root@10.21.0.120 'cd /root ; tar czf - vvscripts/vvorkaws.sh' | tar xzf - ; /root/vvscripts/vvorkaws.sh ".$act." ".$cnum." ); fi";
 
 				$result=trim(utf8_encode($ssh->exec($cmd)));
-			
+			}
 		}
 		return $result;
 
