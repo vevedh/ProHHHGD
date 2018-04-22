@@ -32,6 +32,7 @@
         "@ionic/storage": "2.1.3",
         "cordova-android": "6.4.0",
         "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-ionic": "^4.1.5",
         "cordova-plugin-ionic-webview": "^1.1.16",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-whitelist": "^1.3.1",
@@ -79,7 +80,12 @@
             "cordova-plugin-whitelist": {},
             "cordova-plugin-device": {},
             "cordova-plugin-splashscreen": {},
-            "cordova-plugin-ionic-webview": {}
+            "cordova-plugin-ionic-webview": {},
+            "cordova-plugin-ionic": {
+                "APP_ID": "d5cc80b5",
+                "CHANNEL_NAME": "Production",
+                "UPDATE_METHOD": "background"
+            }
         },
         "platforms": [
             "android"
