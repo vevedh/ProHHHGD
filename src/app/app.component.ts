@@ -107,7 +107,14 @@ export class MyApp {
       description: 'Chiffres d\'affaires magasins.',
       page: 'CamagasinsPage',
       color: '#1010FF'
-    }
+    },
+      {
+        title: 'Stats Chiffres',
+        icon: 'stats',
+        description: 'Stats Chiffres d\'affaires magasins.',
+        page: 'CaevomoisPage',
+        color: '#1010FF'
+      }
   ];
 
   constructor(public platform: Platform,
