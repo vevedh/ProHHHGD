@@ -20,7 +20,7 @@ import { TestProvider } from '../providers/test/test';
 
 
 Pro.init('d5cc80b5', {
-  appVersion: '3.1.5'
+  appVersion: '3.1.6'
 })
 
 
