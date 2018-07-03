@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController,IonicPage, NavParams, Loading, LoadingController, Alert, AlertController } from 'ionic-angular';
 import { Thservices } from '../../providers/thservices/thservices';
+import { Network } from '@ionic-native/network';
 
 /*
   Generated class for the Camagasins page.
@@ -32,10 +33,32 @@ export class CamagasinsPage {
   selDate: string = (new Date).toLocaleDateString('fr-FR').substr(6, 4)+"-"+(new Date).toLocaleDateString('fr-FR').substr(3, 2)+"-"+(new Date).toLocaleDateString('fr-FR').substr(0, 2);//(new Date()).toISOString();
   selOptions: any = { title: 'Selection d\'une enseigne' };
 
-  constructor(public loadCtrl: LoadingController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public vvs: Thservices) {
+  constructor(public loadCtrl: LoadingController, public alertCtrl: AlertController, private network: Network,public navCtrl: NavController, public navParams: NavParams, public vvs: Thservices) {
 
   }
 
+
+  displayNetworkUpdate(connectionState: string) {
+    let networkType = this.network.type;
+    console.log(`You are now ${ connectionState } via ${ networkType }`);
+   /* this.toast.create({
+      message: `You are now ${connectionState} via ${networkType}`,
+      duration: 3000
+    }).present();*/
+  }
+
+
+  ionViewDidEnter() {
+    this.network.onConnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+
+    this.network.onDisconnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CamagasinsPage'+this.selDate);
   }

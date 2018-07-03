@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController, MenuController,Toast,ToastController } from 'ionic-angular';
 //import { AppVersion } from '@ionic-native/app-version';
 import { Storage } from '@ionic/storage';
+import { Network } from '@ionic-native/network';
 //import { NativeStorage } from '@ionic-native/native-storage';
 
 //import {  AppInfo } from '@ionic-native/pro'; //, AppInfo, DeployInfo
@@ -30,7 +31,7 @@ export class LoginPage {
   userInfos: any;
 
   //public appVersion:AppVersion,
-  constructor(public menuCtrl: MenuController, public thservices: Thservices, public nativeStorage:Storage,  public thservices1: Thservices,  public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public navParams: NavParams,  public appDatas: AppDatas) {
+  constructor(public menuCtrl: MenuController, public thservices: Thservices, private network: Network,public nativeStorage:Storage,  public thservices1: Thservices,  public navCtrl: NavController, public alertCtrl: AlertController, public toast:ToastController,public loadingCtrl: LoadingController, public navParams: NavParams,  public appDatas: AppDatas) {
     this.menuCtrl.enable(false);
     /*try {
       this.appVersion.getVersionNumber().then((res:AppInfo) => {
@@ -46,6 +47,27 @@ export class LoginPage {
 
   }
 
+
+  displayNetworkUpdate(connectionState: string) {
+    let networkType = this.network.type;
+    this.toast.create({
+      message: `You are now ${connectionState} via ${networkType}`,
+      duration: 3000
+    }).present();
+  }
+
+
+  ionViewDidEnter() {
+    this.network.onConnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+
+    this.network.onDisconnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+  }
    ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
     this.checkActiveDir();

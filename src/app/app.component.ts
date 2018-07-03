@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 //import { AndroidPermissions } from '@ionic-native/android-permissions';
 
+import { FCM } from '@ionic-native/fcm';
+
 import { Thservices } from '../providers/thservices/thservices';
 import { AppDatas } from '../providers/app-datas/app-datas';
 
@@ -126,6 +128,7 @@ export class MyApp {
     public menuCtrl: MenuController,
     public appDatas: AppDatas,
     public thservices: Thservices,
+    private fcm: FCM,
     public loadingCtrl: LoadingController) {
 
       //,
@@ -231,6 +234,22 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      //Notifications
+      /*this.fcm.subscribeToTopic('all');
+      this.fcm.getToken().then(token => {
+        console.log(token);
+      })
+      this.fcm.onNotification().subscribe(data => {
+        if (data.wasTapped) {
+          console.log("Received in background");
+        } else {
+          console.log("Received in foreground");
+        };
+      })
+      this.fcm.onTokenRefresh().subscribe(token => {
+        console.log(token);
+      });
+      */
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
@@ -274,6 +293,9 @@ export class MyApp {
         console.log("S'execute sans electron");
       }
       //-------------------------------------------
+
+
+
 
 
     });

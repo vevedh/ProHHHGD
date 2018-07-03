@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class Thservices {
 
    // http: Http;
-    servicesURL: string;
+    public servicesURL: string;
     emailData: any;
     appStorage: Storage;
     app_uid: any;
@@ -22,11 +22,39 @@ export class Thservices {
     public options:any = {};
 
 
+
   constructor(public  http: HttpClient) { //, private electronService?:ElectronService
         //this.http = _http;
         this.servicesURL = "http://3hservices.hhhgd.com/Amfphp/";
 
     }
+
+
+
+
+  sendNotification() {
+    let body = {
+      "notification": {
+        "title": "New Notification has arrived",
+        "body": "Notification Body",
+        "sound": "default",
+        "click_action": "FCM_PLUGIN_ACTIVITY",
+        "icon": "fcm_push_icon"
+      },
+      "data": {
+        "param1": "value1",
+        "param2": "value2"
+      },
+      "to": "/topics/all",
+      "priority": "high",
+      "restricted_package_name": ""
+    }
+    let options = new HttpHeaders().set('Content-Type', 'application/json');
+    this.http.post("https://fcm.googleapis.com/fcm/send", body, {
+      headers: options.set('Authorization', 'key=AAAAeazeGIk:APA91bF9o8KCxcbhbBhDILtJCWtE1B-43tZJNQDWUxuI_RViEraaRdaHqFAzTRMjZtYf_NEJrswUuQcSyUUCzvvbE853OqU94lpTJ15Wbpi658nm1r4AH8by4st-WcDgcZL4XM1ZGi8D'),
+    })
+      .subscribe();
+  }
 
     getAppId(): any {
 
