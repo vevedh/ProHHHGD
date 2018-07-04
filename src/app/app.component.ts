@@ -128,7 +128,6 @@ export class MyApp {
     public menuCtrl: MenuController,
     public appDatas: AppDatas,
     public thservices: Thservices,
-    private fcm: FCM,
     public loadingCtrl: LoadingController) {
 
       //,
