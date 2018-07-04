@@ -6,7 +6,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ChartModule } from 'angular-highcharts';
-import { FCM } from '@ionic-native/fcm';
 import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 import { Network } from '@ionic-native/network';
@@ -63,7 +62,6 @@ export class MyErrorHandler implements ErrorHandler {
     MyApp
   ],
   providers: [
-    FCM,
      Network,
     HttpClient,
     StatusBar,

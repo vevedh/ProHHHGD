@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 //import { AndroidPermissions } from '@ionic-native/android-permissions';
 
-import { FCM } from '@ionic-native/fcm';
+//import { FCM } from '@ionic-native/fcm';
 
 import { Thservices } from '../providers/thservices/thservices';
 import { AppDatas } from '../providers/app-datas/app-datas';
