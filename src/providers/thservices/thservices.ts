@@ -218,6 +218,18 @@ export class Thservices {
     }
 
 
+  doSshCmd(ipmag: string,puser:string,ppasswd:string,cmd:string): any {
+
+
+    var callData = JSON.stringify({ "ipmag": ipmag, "puser": puser, "ppasswd": ppasswd, "cmd": cmd });
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options: any = { headers: new HttpHeaders().set('Content-Type', 'application/json'), params: new HttpParams().set('headers', ' headers') };
+
+    return this.http.post(" https://vvapi-node.herokuapp.com/vvapi/v2/orkdossh", callData, options)
+      .map(res => res)
+      .catch(this.handleError);
+
+  }
 
     doRebootComputer(computername:string):any {
 

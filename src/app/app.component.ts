@@ -146,85 +146,7 @@ export class MyApp {
 
   initializeApp() {
 
-    /*
-     this.deploy.check().then((snapshotAvailable: boolean) => {
-      if (snapshotAvailable) {
-        console.log("Snapshot aivaible",snapshotAvailable);
-        let alert = this.alertCtrl.create({
-          title: 'Il y a une mise à jour disponible',
-          message: 'Il est vivement conseiller de la faire ?',
-          buttons: [{
-            text: 'Annuler',
-            handler: () => {
-              console.log('Click sur Annuler');
-            }
-          }, {
-            text: 'Mise à jour',
-            handler: () => {
 
-              let updateMe = true;
-
-              let toast = this.toastCtrl.create({
-                message: 'Téléchargement en cours .. 0%',
-                position: 'bottom',
-                showCloseButton: true,
-                closeButtonText: 'Annuler'
-              });
-
-              toast.onDidDismiss(() => {
-                updateMe = false;
-              });
-
-              toast.present();
-
-              // this.deploy.channel = 'production';
-              this.deploy
-                .download({
-                  onProgress: p => {
-                    toast.setMessage('Téléchargement en cours .. ' + p + '%');
-                    console.log('Téléchargement = ' + p + '%');
-                  }
-                })
-                .then(() => {
-
-                  if (updateMe) {
-                    this.deploy
-                      .extract({
-                        onProgress: p => {
-                          toast.setMessage('Extraction .. ' + p + '%');
-                          console.log('Extractiion = ' + p + '%');
-                        }
-                      })
-                      .then(() => {
-                        if (updateMe) {
-                          return this.deploy.load();
-                        }
-                      })
-                      .catch(() => toast.setMessage('Uhh ohh, problème réseau!'))
-                  }
-
-                })
-                .catch(() => toast.setMessage('Uhh ohh, problème réseau!'))
-            }
-          }]
-        });
-        alert.present();
-        // When snapshotAvailable is true, you can apply the snapshot
-
-      }
-    }, (err) => {
-      console.log("Erreur MAJ",err);
-      let toast = this.toastCtrl.create({
-                message: 'ionic-plugin non géré',
-                position: 'middle',
-                duration: 3000,
-                //showCloseButton: true,
-                //closeButtonText: 'Annuler'
-              });
-      toast.present();
-      //alert("ionic-plugin non géré");
-    });
-    */
     this.platformReady();
 
   }
@@ -234,21 +156,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       //Notifications
-      /*this.fcm.subscribeToTopic('all');
-      this.fcm.getToken().then(token => {
-        console.log(token);
-      })
-      this.fcm.onNotification().subscribe(data => {
-        if (data.wasTapped) {
-          console.log("Received in background");
-        } else {
-          console.log("Received in foreground");
-        };
-      })
-      this.fcm.onTokenRefresh().subscribe(token => {
-        console.log(token);
-      });
-      */
+
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
@@ -263,20 +171,7 @@ export class MyApp {
       } else if (this.platform.is('mobile') || this.platform.is('iphone') || this.platform.is('tablet') || this.platform.is('phablet') || this.platform.is('cordova') || this.platform.is('android')) {
         console.log("S'exécute sur une platform mobile!");
         //this.checkActiveDir();
-        /*this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-          success => console.log('Permission granted'),
-          err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
-        );
 
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
-          success => console.log('Permission granted'),
-          err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
-        );
-
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS).then(
-          success => console.log('Permission granted'),
-          err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS)
-        );*/
         this.rootPage = 'LoginPage';
       }
 

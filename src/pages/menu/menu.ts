@@ -46,6 +46,21 @@ export class MenuPage {
     });
    }
 
+  doFtpMag30() {
+    this.showLoading();
+    this.thservices.doSshCmd('10.130.0.2','root','orika','service vsftpd restart').subscribe((res) => {
+      this.hideLoading();
+      console.log("Redemarrage effectué", res);
+    });
+  }
+
+  doRstBizerba() {
+    this.showLoading();
+    this.thservices.doRebootComputer('srvbizerba.3hservices.net').subscribe((res) => {
+      this.hideLoading();
+      console.log("Redemarrage effectué", res);
+    });
+  }
 
   doLogout() {
     this.nativeStorage.remove("ProHHHGD").then((res) => {

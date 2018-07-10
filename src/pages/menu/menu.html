@@ -21,7 +21,7 @@
         <div class="item item-avatar">
             <img [src]="userInfos?.picture" />
         </div>
-        
+
         <ion-card-content>
             <h2>Test</h2>
             <p>autre info</p>
@@ -66,6 +66,20 @@
                 <button ion-button center small (click)="doRstOrkarte()">
                     Redemarrage orkarte
                 </button>
+            </ion-col>
+        </ion-row>
+        <ion-row ion-item *ngIf="usertype=='admintech'">
+            <ion-col align-self-center>
+                <button ion-button center small (click)="doFtpMag30()">
+      Redemarrage ftp magasin 30
+    </button>
+            </ion-col>
+        </ion-row>
+        <ion-row ion-item *ngIf="usertype=='admintech'">
+            <ion-col align-self-center>
+                <button ion-button center small (click)="doRstBizerba()">
+      Redemarrage Serveur Bizerba
+    </button>
             </ion-col>
         </ion-row>
 
